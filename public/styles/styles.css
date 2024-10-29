@@ -1,7 +1,9 @@
-body {
-    height: 100%;
+
+html, body {
+    height: 100vh;
     margin: 0;
     font-family: "Poppins", "sans-serif";
+    overflow: hidden;
 }
 .background-video {
     position: relative;
@@ -14,7 +16,7 @@ video {
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 100vh;  
+    height: 100%;  
     width: 100%;
     transform: translate(-50%, -50%);
     object-fit: cover;
@@ -116,6 +118,12 @@ h1, h2 {
     backdrop-filter: blur(15px);
     overflow-y: scroll;
 }
+.book, .book-covers, .book > img {
+    height: 350px;
+    width: 250px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
 .book-section {
     display: flex;
     gap: 50px;
@@ -200,9 +208,27 @@ h1, h2 {
 .bmark-and-share > * {
     width: 90px;
 }
+.bookmark {
+    cursor: pointer;
+}
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4); 
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.bookmarkTrue {
+    animation: pop 0.3s ease;
+}
+
 .review-desc {
     display: flex;
-    align-items: center;
+    padding-top: 30px;
     height: 100%;
     margin-left: 200px;
     margin-right: 200px;
@@ -239,14 +265,6 @@ h1, h2 {
     background-color: #555;
 }
 
-.book, .book > img {
-    height: 350px;
-    width: 250px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-
-
 @media (max-width: 1539px) {
     .recently-viewed {
         width: 100%;
@@ -254,6 +272,137 @@ h1, h2 {
         margin: 50px;
     }
 }
+@media (max-width: 1565px) {
+    .book-title {
+        font-size: 4rem;
+    }
+    .book-author {
+        font-size: 2rem;
+    }
+    .specific-book > img {
+        height: 400px;
+        width: 300px;
+    }
+}
+@media (max-width: 1450px) {
+    .book-title {
+        font-size: 3.5rem;
+    }
+    .book-author {
+        font-size: 2.5rem;
+    }
+    .specific-book > img {
+        height: 350px;
+        width: 250px;
+    }
+}
+@media (max-width: 1350px) {
+
+    .specific-book > img {
+        position: static;
+        height: 250px;
+        width: 200px;
+    }
+    .review-buttons {
+        width: 100%;
+        justify-content: space-evenly;
+    }
+    .bmark-and-share {
+        margin: 0;
+    }
+    .review-wrapper {
+        margin-left: 70px;
+        margin-right: 70px;
+    }
+}
+@media (max-width: 1250px) {
+    .specific-book > img {
+        height: 300px;
+        width: 250px;
+    }
+    .review-header, .review-desc {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .review-wrapper {
+        margin-left: 70px;
+        margin-right: 70px;
+    }
+}
+@media (max-width: 800px) {
+    .specific-book > img {
+        height: 250px;
+        width: 200px;
+    }
+    .book-title {
+        font-size: 3rem;
+    }
+    .book-author {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 650px) {
+    .book-section {
+        margin-bottom: 40px;
+    }
+    .book-title {
+        font-size: 1.5rem;
+    }
+    .book-author {
+        font-size: 1rem;
+    }
+    .review-content {
+        max-height: 350px;
+     }
+}
+
+@media (max-width: 630px) {
+    .book-desc {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .specific-book {
+        margin-top: 15px;
+    }
+    .book-details {
+        width: 100%;
+    }
+    .bmark-and-share {
+        height: 40px;
+    }
+    .get-book {
+        width: 120px;
+        height: 40px;
+        margin-left: 10px;
+        font-size: smaller;
+    }
+    .review-wrapper {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .review-header {
+        height: 100px;
+    }
+    .review-wrapper > h1 {
+        font-size: 1.3rem;
+    }
+    .review-content {
+        max-height: 170px;
+    }
+
+
+}
+
+
 
 @media (max-width: 751px) {
     .title {
