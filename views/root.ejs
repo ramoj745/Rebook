@@ -12,7 +12,7 @@
 <body>
     <div class="background-video">
         <video autoplay muted loop playsinline>
-            <source src="/images/coffee.mp4" type="video/mp4" class="video">
+            <source src="/images/coffee.mp4" type="video/mp4">
         </video>
     </div>
     <div class="content">
@@ -27,14 +27,16 @@
             <div class="recently-bar">Recently Reviewed</div>
             <div class="recently-content">
                 <%books.forEach(book => {%>
-                <div class="book">
-                    <img src="https://covers.openlibrary.org/b/isbn/<%=book.isbn%>-M.jpg">
-                </div>
+                <a href="/books/<%=book.id%>" class="book-covers">
+                    <div class="book">
+                        <img src="https://covers.openlibrary.org/b/isbn/<%=book.isbn%>-M.jpg">
+                    </div>
+                </a>
                 <%})%>
             </div>
         </div>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/index.js"></script>
 </body>
 </html>
