@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Site</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-video">
+        <video autoplay muted loop playsinline>
+            <source src="/images/coffee.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="content-specific">
+        <div class="book-section">
+            <div class="specific-book">
+                <img src="https://covers.openlibrary.org/b/isbn/<%=book.isbn%>-M.jpg">
+            </div>
+            <div class="book-details">
+                <h1 class="book-title"><%=book.title%></h1>
+                <h2 class="book-author"><%=book.author%></h2>
+                <p class="book-desc"><%=book.description%></p>
+                <star>★★★★★</star>
+            </div>
+        </div>
+        <div class="review">
+            <div class="review-header">
+                <div class="review-buttons">
+                    <a href="..." class="get-book">
+                        Get Book
+                    </a>
+                    <div class="bmark-and-share">
+                        <img src="/images/bookmark.svg">
+                        <img src="/images/share.svg">
+                    </div>
+                </div>
+            </div>
+            <div class="review-desc">
+                <div class="review-wrapper">
+                    <h1>My Honest Review</h1>
+                    <div class="review-content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue efficitur odio, et placerat felis lacinia at. Vivamus mattis dictum lorem. Etiam est est, laoreet in euismod et, blandit sed arcu. Vestibulum tellus augue, eleifend interdum fringilla ac, varius sed metus. Phasellus vehicula est quis sapien egestas cursus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus elementum dignissim nisi id lacinia. In ut placerat nunc, ac cursus massa. Praesent volutpat venenatis dictum. Sed purus libero, cursus sed semper nec, luctus sit amet enim. Maecenas tempor urna ligula, a vestibulum quam efficitur ac. Sed nec mi rutrum, tempor diam et, cursus sapien. Sed imperdiet vulputate urna sed efficitur. Sed id mauris dapibus, consequat lacus at, commodo risus. Aenean vel consectetur diam.
+
+Suspendisse sit amet viverra sem. Suspendisse aliquet semper volutpat. Vivamus in convallis lacus. Integer id augue convallis, dictum elit eu, tristique lectus. Nunc sed ligula nisi. Phasellus blandit sit amet ex a sodales. Curabitur a lectus non massa blandit efficitur. Curabitur cursus turpis vitae arcu lacinia blandit.
+
+Fusce ligula urna, sodales nec mollis eget, efficitur quis lectus. Suspendisse faucibus arcu metus, eget pulvinar libero fermentum sed. In consequat, est eu rhoncus interdum, orci eros finibus nunc, accumsan porta nulla dui ac justo. Praesent eget diam ac magna aliquam aliquet. Cras in magna at arcu bibendum malesuada. Suspendisse dictum diam sit amet felis scelerisque tristique. Donec ornare lorem sit amet tristique aliquam. Morbi lobortis sollicitudin nulla, at fermentum sapien pulvinar at.
+
+In venenatis placerat pellentesque. Nam vel dignissim elit. Maecenas mattis justo sit amet porta malesuada. Cras facilisis dui in viverra aliquet. Mauris ante est, lacinia a maximus quis, ultricies ut augue. Phasellus in tristique ligula. Fusce dictum dictum nisi, id laoreet lorem bibendum ut. Mauris eu nibh eget tellus pharetra consequat ut quis mi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean at magna ligula. Vivamus mollis felis odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+Vivamus tristique faucibus magna id iaculis. Pellentesque sit amet sollicitudin odio. Morbi mauris nisl, sodales id mi eleifend, consequat malesuada leo. Pellentesque venenatis ornare lacus sit amet placerat. Sed aliquet tortor mi, sit amet finibus risus luctus id. Morbi elementum sollicitudin dignissim. Cras elementum est vel libero sagittis, nec mollis nulla suscipit. Proin vehicula, quam eu tincidunt maximus, massa erat ultrices sem, id molestie purus lectus non justo. Donec eget ultrices mi. Donec vitae porta ipsum, in dignissim enim. Fusce interdum, ipsum eu lobortis maximus, metus enim lacinia velit, id bibendum ante massa quis ligula. Duis commodo risus sit amet aliquet tincidunt. Etiam nunc odio, rhoncus vitae erat sit amet, laoreet luctus justo.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
