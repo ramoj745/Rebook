@@ -1,5 +1,4 @@
 import express from "express"
-import axios from "axios"
 import bodyParser from "body-parser"
 import pg from "pg"
 
@@ -23,8 +22,20 @@ async function getBooks() {
         )
         return response.rows
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
+}
+
+async function getSpecificBook(id) {
+    try {
+        const response = await db.query(
+            "SELECT * FROM reviewed_books WHERE id = $1", [id]
+        )
+        return response.rows
+    } catch (error) {
+        console.error(error)
+    }
+    
 }
 
 app.use(bodyParser.urlencoded({extended : true}))
@@ -35,7 +46,11 @@ app.get("/", async (req, res) => {
     res.render("root.ejs", {books : books})
 })
 
-app.get("/books/:id", (req, res) => {
+app.get("/books/:id", async (req, res) => {
+    const id = req.params.id
+    const data = await getSpecificBook(id)
+    res.render("bookView.ejs", {book : data[0]})
+
 
 }) 
 
