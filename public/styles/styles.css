@@ -31,6 +31,17 @@ video {
     top: 50%;  
     left: 50%;
 }
+.content-specific {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    top: 50%;  
+    left: 50%;
+}
 .title {
     display: flex;
     flex-direction: column;
@@ -105,7 +116,112 @@ h1, h2 {
     backdrop-filter: blur(15px);
     overflow-y: scroll;
 }
+.book-section {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
+.specific-book > img {
+    position: relative;
+    top: 80px;
+    height: 450px;
+    width: 350px;
+    box-shadow: 0px 4px 15px rgb(0, 0, 0);
+    z-index: 1;
+}
+.book-details {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+.book-title {
+    font-size: 5rem;
+    color: #fef3ea;
+    margin-bottom: 0;
+}
+.book-author {
+    font-size: 3rem;
+    color: #fef3ea;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+.book-desc {
+    color: #fef3ea;
+}
+.review {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.review-header {
+    display: flex;
+    justify-content: flex-end;
+    height: 150px;
+    margin-left: 200px;
+    margin-right: 200px;
+    background-color: #fef3ea54;
+    border-radius: 30px 30px 0px 0px;
+    border-bottom: 1px solid #fef3ea;
+    backdrop-filter: blur(15px);
+}
+.review-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 65%;
+}
+.get-book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: #918071;
+    color: #fef3ea;
+    font-size: 1.4rem;
+    font-weight: 600;
+    height: 50px;
+    width: 200px;
+    border-radius: 25px;
+    transition: 0.3s ease;
+}
+.get-book:hover {
+    background-color: #fef3ea;
+    color: #918071;
 
+}
+.bmark-and-share {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+}
+.bmark-and-share > * {
+    width: 90px;
+}
+.review-desc {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 200px;
+    margin-right: 200px;
+    background-color: #fef3ea54;
+    backdrop-filter: blur(15px);
+    color: #fef3ea;
+}
+.review-wrapper {
+    margin-left: 125px;
+    margin-right: 125px;
+}
+.review-wrapper > h1 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+.review-content {
+    max-height: 270px;
+    overflow-y: scroll;
+}
 ::-webkit-scrollbar {
     width: 13px;
 }
@@ -129,6 +245,8 @@ h1, h2 {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+
+
 @media (max-width: 1539px) {
     .recently-viewed {
         width: 100%;
@@ -150,3 +268,4 @@ h1, h2 {
         font-size: 1.7rem;
     }
 }
+
