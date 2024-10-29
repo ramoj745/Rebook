@@ -35,7 +35,19 @@ async function getSpecificBook(id) {
     } catch (error) {
         console.error(error)
     }
-    
+}
+
+async function bookmarkSpecificBook(id) {
+    try {
+        const response = await db.query(
+            "UPDATE reviewed_books SET is_bookmarked = NOT is_bookmarked WHERE id = $1 RETURNING is_bookmarked", [id]
+        )
+        return response.rows
+
+    } catch (error) {
+        console.error(error)
+    }
+
 }
 
 app.use(bodyParser.urlencoded({extended : true}))
@@ -50,9 +62,13 @@ app.get("/books/:id", async (req, res) => {
     const id = req.params.id
     const data = await getSpecificBook(id)
     res.render("bookView.ejs", {book : data[0]})
+})
 
-
-}) 
+app.post("/toggle-bookmark/:id", async (req, res) => {
+    const id = req.params.id
+    const response = await bookmarkSpecificBook(id)
+    res.json({is_bookmarked : response[0].is_bookmarked})
+})
 
 app.listen(port, () => {
     console.log("Listening on port " + port)
