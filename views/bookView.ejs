@@ -8,12 +8,38 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
     <div class="background-video">
         <video autoplay muted loop playsinline>
             <source src="/images/coffee.mp4" type="video/mp4">
         </video>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Book & Review</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/editBook/<%=book.id%>?_method=PATCH" method="POST" id="editForm">
+                        <div class="editBook">
+                            <label for="ISBN">ISBN:</label>
+                            <input class="editInput" type="text" name="ISBN" id="ISBN" placeholder="eg. 0306406152..">
+                            <label for="description">Edit Book Description:</label>
+                            <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="description" id="description" maxlength="200" placeholder="Enter your new book description here, or feel free to leave it blank."></textarea>
+                            <label for="review">Edit Review:</label>
+                            <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="review" id="review" placeholder="Enter your new review here, or feel free to leave it blank."></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn" style="color: #fef3ea; border: 1px solid #fef3ea;">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-specific">
         <div class="book-section">
@@ -45,7 +71,12 @@
             </div>
             <div class="review-desc">
                 <div class="review-wrapper">
-                    <h1>My Honest Review</h1>
+                    <div class="review-edit">
+                        <h1>My Honest Review</h1>
+                        <button type="button" class="btn" style="height: 30px; padding: 0; border: 0;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <img src="/images/edit-btn.svg" height="30px" alt="edit">
+                        </button>
+                    </div>
                     <div class="review-content">
                         <%=book.review%>
                     </div>
@@ -53,6 +84,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/index.js"></script>
 </body>
