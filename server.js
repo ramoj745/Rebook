@@ -102,6 +102,7 @@ app.get("/", async (req, res) => {
     res.render("root.ejs", {books : books})
 })
 
+// specific book view
 app.get("/books/:id", async (req, res) => {
     const id = req.params.id
     const data = await getSpecificBook(id)
@@ -122,6 +123,12 @@ app.patch("/editBook/:id", async (req, res) => {
 
     await editSpecificBook(id, isbn, bookDescription, editedReview)
     res.redirect(`/books/${id}`)
+})
+
+// all book view
+app.get("/allBooks", async (req, res) => {
+    const books = await getBooks()
+    res.render("allBooksView.ejs", {books : books})
 })
 
 app.listen(port, () => {
