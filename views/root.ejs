@@ -19,7 +19,7 @@
         <div class="title">
             <h1 class="heading"><span class="re">Re</span>book</h1>
             <h2 class="sub-heading">Your Guide to Better Books</h2>
-            <form action="/url" method="GET">
+            <form action="/allBooks" method="GET">
                 <button type="submit" class="browseBtn">Browse</button>
             </form>
         </div>
@@ -27,11 +27,11 @@
             <div class="recently-bar">Recently Reviewed</div>
             <div class="recently-content">
                 <%books.forEach(book => {%>
-                <a href="/books/<%=book.id%>" class="book-covers">
                     <div class="book">
-                        <img src="https://covers.openlibrary.org/b/isbn/<%=book.isbn%>-M.jpg">
+                        <a href="/books/<%=book.id%>">
+                            <img src="https://covers.openlibrary.org/b/isbn/<%=book.isbn%>-M.jpg">
+                        </a>
                     </div>
-                </a>
                 <%})%>
             </div>
         </div>
