@@ -24,14 +24,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/editBook/?_method=PATCH" method="POST" id="editForm">
+                    <form action="/createBook/" method="POST" id="editForm">
                         <div class="editBook">
                             <label for="ISBN">ISBN:</label>
-                            <input class="editInput" type="text" name="ISBN" id="ISBN" placeholder="eg. 0306406152..">
+                            <input class="editInput" type="text" name="ISBN" id="ISBN" placeholder="eg. 0306406152.." required>
                             <label for="description">Add Book Description:</label>
                             <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="description" id="description" maxlength="200" placeholder="Enter your new book description here, or feel free to leave it blank."></textarea>
+                            <label for="genre">Add Genre:</label>
+                            <textarea class="editInput" rows="1" style="width: 80%; overflow-y: scroll;" name="genre" id="review" placeholder="Enter your genre here" required></textarea>
                             <label for="review">Add Review:</label>
                             <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="review" id="review" placeholder="Enter your new review here, or feel free to leave it blank."></textarea>
+                            <label for="rating">Add Rating:</label>
+                            <select id="dropdown" name="options">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn" style="color: #fef3ea; border: 1px solid #fef3ea;">Save changes</button>
