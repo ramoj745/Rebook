@@ -385,6 +385,14 @@ input::placeholder, textarea::placeholder {
 .add-book:hover {
     border: 5px solid #ffecdb;
 }
+#dropdown {
+    width: 50px;
+    margin-bottom: 20px;
+    background-color: #9180718f;
+    color: #fef3ea;
+    outline: none;
+}
+
 
 @media (max-width: 1539px) {
     .recently-viewed {
