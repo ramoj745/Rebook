@@ -27,11 +27,39 @@
                     <form action="/editBook/<%=book.id%>?_method=PATCH" method="POST" id="editForm">
                         <div class="editBook">
                             <label for="ISBN">ISBN:</label>
-                            <input class="editInput" type="text" name="ISBN" id="ISBN" placeholder="eg. 0306406152.." required>
+                            <input class="editInput" type="text" name="ISBN" id="ISBN" placeholder="eg. 0306406152..">
                             <label for="description">Edit Book Description:</label>
                             <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="description" id="description" maxlength="200" placeholder="Enter your new book description here, or feel free to leave it blank."></textarea>
                             <label for="review">Edit Review:</label>
                             <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="review" id="review" placeholder="Enter your new review here, or feel free to leave it blank."></textarea>
+                            <div class="dropdowns">
+                            <label for="genre">Edit Genre:</label>
+                            <select id="genreDropdown" name="genres" style="font-weight: normal;">
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="General Fiction">General Fiction</option>
+                                <option value="Fantasy & Sci-Fi">Fantasy & Sci-Fi</option>
+                                <option value="Mystery & Thriller">Mystery & Thriller</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Biography & Memoir">Biography & Memoir</option>
+                                <option value="History & True Crime">History & True Crime</option>
+                                <option value="Self-Help & Psychology">Self-Help & Psychology</option>
+                                <option value="Science & Nature">Science & Nature</option>
+                                <option value="Children's Books">Children's Books</option>
+                                <option value="Young Adult">Young Adult</option>
+                                <option value="Graphic Novels & Comics">Graphic Novels & Comics</option>
+                                <option value="Poetry & Essays">Poetry & Essays</option>
+                                <option value="Arts & Culture">Arts & Culture</option>
+                            </select>
+                            <label for="rating">Edit Rating:</label>
+                            <select id="ratingDropdown" name="ratings">
+                                <option value="" disabled selected>...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn" style="color: #fef3ea; border: 1px solid #fef3ea;">Save changes</button>
@@ -43,6 +71,11 @@
     </div>
     <div class="content-specific">
         <div class="book-section">
+            <div class="back-button-view">
+                <a href="/allBooks">
+                    <img src="/images/back-btn.png" alt="back">
+                </a>
+            </div>
             <div class="specific-book">
                 <img src="https://covers.openlibrary.org/b/isbn/<%=book.isbn%>-M.jpg">
             </div>
@@ -66,16 +99,21 @@
         <div class="review">
             <div class="review-header">
                 <div class="review-buttons">
+                    <div class="back-button-view-header">
+                        <a href="/allBooks">
+                            <img src="/images/back-btn.png" alt="back">
+                        </a>
+                    </div>
                     <a href="<%=book.book_link%>" class="get-book">
                         Get Book
                     </a>
                     <div class="bmark-and-share">
                         <%if (book.is_bookmarked) {%>
-                        <img class="bookmark" data-id="<%=book.id%>" src="/images/is_bookmarked.svg">
+                        <img class="bookmark" data-id="<%=book.id%>" src="/images/is_bookmarked-cropped.svg">
                         <%} else {%>
-                        <img class="bookmark" data-id="<%=book.id%>" src="/images/bookmark.svg">
+                        <img class="bookmark" data-id="<%=book.id%>" src="/images/bookmark-cropped.svg">
                         <%}%>    
-                        <img src="/images/share.svg">
+                        <img src="/images/share-cropped.svg" id="share">
                     </div>
                 </div>
             </div>
@@ -83,8 +121,8 @@
                 <div class="review-wrapper">
                     <div class="review-edit">
                         <h1>My Honest Review</h1>
-                        <button type="button" class="btn" style="height: 30px; padding: 0; border: 0;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <img src="/images/edit-btn.svg" height="30px" alt="edit">
+                        <button type="button" class="btn" style="height: 30px; margin-left: 5px; margin-bottom: 5px; padding: 0; border: 0;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <img src="/images/edit-btn-cropped.svg" height="30px" alt="edit">
                         </button>
                     </div>
                     <div class="review-content">
@@ -96,6 +134,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/bookmark.js"></script>
+    <script src="/js/bookmarkShare.js"></script>
 </body>
 </html>
