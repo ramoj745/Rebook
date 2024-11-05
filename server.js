@@ -39,7 +39,7 @@ async function getSpecificBook(id) {
     }
 }
 
-async function editSpecificBook(id, isbn, description, review) {
+async function editSpecificBook(id, isbn, description, review, genre, rating) {
 
     try {
         if (isbn) {
@@ -73,6 +73,20 @@ async function editSpecificBook(id, isbn, description, review) {
             await db.query(
                 "UPDATE reviewed_books SET review = $1 WHERE id = $2",
                 [review, id]
+            )
+        }
+
+        if (genre) {
+            await db.query(
+                "UPDATE reviewed_books SET genre = $1 WHERE id = $2",
+                [genre, id]
+            )
+        }
+
+        if (rating) {
+            await db.query(
+                "UPDATE reviewed_books SET rating = $1::integer WHERE id = $2",
+                [rating, id]
             )
         }
 
@@ -124,6 +138,16 @@ async function filterBooks(genre, rating) {
     
 }
 
+async function deleteBook(id) {
+    try {
+        await db.query(
+            "DELETE FROM reviewed_books WHERE id = $1", [id]
+        )
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 async function bookmarkSpecificBook(id) {
     try {
         const response = await db.query(
@@ -164,8 +188,10 @@ app.patch("/editBook/:id", async (req, res) => {
     const isbn = req.body.ISBN
     const bookDescription = req.body.description
     const editedReview = req.body.review
+    const genre = req.body.genres
+    const rating = req.body.ratings
 
-    await editSpecificBook(id, isbn, bookDescription, editedReview)
+    await editSpecificBook(id, isbn, bookDescription, editedReview, genre, rating)
     res.redirect(`/books/${id}`)
 })
 
@@ -191,6 +217,12 @@ app.get("/filterBooks", async (req, res) => {
     const {genre, rating} = req.query
     const response = await filterBooks(genre, rating)
     res.json(response)
+})
+
+app.delete("/deleteBook/:id", async (req, res) => {
+    const id = req.params.id
+    await deleteBook(id)
+    res.status(200).json({message : "Book deleted successfully."})
 })
 
 app.listen(port, () => {
