@@ -43,13 +43,12 @@ async function editSpecificBook(id, isbn, description, review) {
 
     try {
         if (isbn) {
+            
             await db.query(
                 "UPDATE reviewed_books SET isbn = $1 WHERE id = $2", [isbn, id]
             )
             const response = await axios.get(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`)
             const bookData = response.data[`ISBN:${isbn}`]
-
-            console.log(bookData)
             
             const title = bookData.title
             const author = bookData.authors[0].name
@@ -87,8 +86,6 @@ async function createBook(isbn, description, genre, review, rating) {
     try {
         const response = await axios.get(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`)
         const bookData = response.data[`ISBN:${isbn}`]
-
-        console.log(bookData)
         
         const title = bookData.title
         const author = bookData.authors[0].name
@@ -102,6 +99,29 @@ async function createBook(isbn, description, genre, review, rating) {
     } catch (error) {
         console.error(error)
     }
+}
+
+async function filterBooks(genre, rating) {
+
+    let query = "SELECT * FROM reviewed_books"
+    let params = []
+
+    if (genre) {
+        query += " WHERE genre = $1"
+        params.push(genre)
+    }
+
+    if (rating) {
+        query += ` ORDER BY rating ${rating === "lowestToHighest" ? "ASC" : "DESC"}`
+    }
+
+    try {
+        const response = await db.query(query,params)
+        return response.rows
+    } catch (error) {
+        console.error(error)
+    }
+    
 }
 
 async function bookmarkSpecificBook(id) {
@@ -130,7 +150,6 @@ app.get("/", async (req, res) => {
 app.get("/books/:id", async (req, res) => {
     const id = req.params.id
     const data = await getSpecificBook(id)
-    console.log(data)
     res.render("bookView.ejs", {book : data[0]})
 })
 
@@ -159,13 +178,19 @@ app.get("/allBooks", async (req, res) => {
 app.post("/createBook", async (req, res) => {
     const isbn = req.body.ISBN
     const description = req.body.description
-    const genre = req.body.genre
+    const genre = req.body.genres
     const review = req.body.review
-    const rating = req.body.options
+    const rating = req.body.ratings
 
     await createBook(isbn, description, genre, review, rating)
     res.redirect("/allBooks")
 
+})
+
+app.get("/filterBooks", async (req, res) => {
+    const {genre, rating} = req.query
+    const response = await filterBooks(genre, rating)
+    res.json(response)
 })
 
 app.listen(port, () => {
