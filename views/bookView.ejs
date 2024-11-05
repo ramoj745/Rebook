@@ -27,7 +27,7 @@
                     <form action="/editBook/<%=book.id%>?_method=PATCH" method="POST" id="editForm">
                         <div class="editBook">
                             <label for="ISBN">ISBN:</label>
-                            <input class="editInput" type="text" name="ISBN" id="ISBN" placeholder="eg. 0306406152..">
+                            <input class="editInput" type="text" name="ISBN" id="ISBN" placeholder="eg. 0306406152.." required>
                             <label for="description">Edit Book Description:</label>
                             <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="description" id="description" maxlength="200" placeholder="Enter your new book description here, or feel free to leave it blank."></textarea>
                             <label for="review">Edit Review:</label>
@@ -50,7 +50,17 @@
                 <h1 class="book-title"><%=book.title%></h1>
                 <h2 class="book-author"><%=book.author%></h2>
                 <p class="book-desc"><%=book.description%></p>
-                <star>★★★★★</star>
+                <%if (book.rating === 1) {%>
+                    <img src="/images/onestar-cropped.svg" height="30px">
+                <%} else if (book.rating === 2) {%>
+                    <img src="/images/twostar-cropped.svg" height="30px">
+                <%} else if (book.rating === 3){%>
+                    <img src="/images/threestar-cropped.svg" height="30px">
+                <%} else if (book.rating === 4){%>
+                    <img src="/images/fourstar-cropped.svg" height="30px">
+                <%} else if (book.rating === 5){%>
+                    <img src="/images/fivestar-cropped.svg" height="30px">
+                <%}%>
             </div>
         </div>
         <div class="review">
@@ -86,6 +96,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/index.js"></script>
+    <script src="/js/bookmark.js"></script>
 </body>
 </html>
