@@ -154,7 +154,11 @@ h1, h2 {
 .book-details {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     width: 45%;
+}
+.book-details > img {
+    width: fit-content;
 }
 .book-title {
     font-size: 5rem;
@@ -332,11 +336,15 @@ input::placeholder, textarea::placeholder {
     align-items: center;
     justify-content: center;
     height: 80px;
-    font-weight: bold;
     background-color: #fef3ea54;
     border-radius: 30px 30px 0px 0px;
     border-bottom: 1px solid #fef3ea;
     backdrop-filter: blur(15px);
+}
+.all-books-bar > h1 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
 }
 .all-books-content {
     display: flex;
@@ -349,10 +357,28 @@ input::placeholder, textarea::placeholder {
     width: 100%;
     height: 100%;
 }
+.sort-by {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: 97%;
+    height: 15%;
+    padding-bottom: 10px;
+}
+.rating-group, .genre-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 .all-books-shelf {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    text-align: center;
     gap: 70px;
     overflow-y: scroll;
     height: 500px;
@@ -385,12 +411,37 @@ input::placeholder, textarea::placeholder {
 .add-book:hover {
     border: 5px solid #ffecdb;
 }
-#dropdown {
-    width: 50px;
-    margin-bottom: 20px;
-    background-color: #9180718f;
-    color: #fef3ea;
+#genreDropdown, #genreNonModal, #ratingNonModal {
+    width: 160px;
+    height: 30px;
+    border-radius: 7px;
     outline: none;
+    border: 0;
+}
+.resetBtn {
+    background-color: #918071;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    border: 0;
+    border-radius: 50px;
+    height: 30px;
+    width: 130px;
+    color: #fef3ea;
+    font-family: "Poppins", "sans-serif";
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.resetBtn:hover {
+    color: #918071;
+    background-color: #fef3ea;
+}
+
+#ratingDropdown {
+    width: 50px;
+    height: 30px;
+    border-radius: 7px;
+    outline: none;
+    border: 0;
 }
 
 
@@ -399,6 +450,9 @@ input::placeholder, textarea::placeholder {
         width: 100%;
         height: 400px;
         margin: 50px;
+    }
+    .book-section {
+        margin-bottom: 20px;
     }
 }
 @media (max-width: 1565px) {
@@ -486,7 +540,7 @@ input::placeholder, textarea::placeholder {
 
 @media (max-width: 650px) {
     .book-section {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
     .book-title {
         font-size: 1.5rem;
@@ -517,7 +571,12 @@ input::placeholder, textarea::placeholder {
         margin-top: 15px;
     }
     .book-details {
+        display: flex;
+        justify-content: center;
         width: 100%;
+    }
+    .book-details > img {
+        margin: auto;
     }
     .bmark-and-share {
         height: 40px;
