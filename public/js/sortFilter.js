@@ -1,6 +1,16 @@
 document.getElementById("genreNonModal").addEventListener("change", updateBook)
 document.getElementById("ratingNonModal").addEventListener("change", updateBook)
 
+const deleteBtn = document.querySelectorAll(".delete-btn")
+
+deleteBtn.forEach(button => {
+    const bookId = button.getAttribute("data-book-id")
+    button.addEventListener("click", () => {
+        confirmAndDeleteBook(bookId)
+    })
+})
+
+
 async function updateBook() {
     const genre = document.getElementById("genreNonModal").value
     const rating = document.getElementById("ratingNonModal").value
@@ -39,5 +49,23 @@ function renderPage(books) {
         bookList.appendChild(bookCard)
     })
 }
+
+async function confirmAndDeleteBook(bookId) {
+    const confirmed = confirm("Are you sure you want to delete this book?")
+
+    if (confirmed) {
+        try {
+            await axios.delete(`/deleteBook/${bookId}`)
+            window.location.reload()
+        } catch (error) {
+            console.error(error)
+        }
+    } else {
+        console.log("Delete cancelled")
+    }
+}
+
+
+
 
 
