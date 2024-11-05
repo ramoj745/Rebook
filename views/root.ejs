@@ -26,6 +26,7 @@
         <div class="recently-viewed">
             <div class="recently-bar">Recently Reviewed</div>
             <div class="recently-content">
+                <%if (books && books.length > 0) {%>
                 <%books.forEach(book => {%>
                     <div class="book">
                         <a href="/books/<%=book.id%>">
@@ -33,6 +34,9 @@
                         </a>
                     </div>
                 <%})%>
+                <%} else {%>
+                    <p style="color: #fef3ea; text-align: center; margin-left: 50px; margin-right: 50px;">Recently Added books will appear here. Click "Browse" to create/browse books.</p>
+                <%}%>
             </div>
         </div>
     </div>
