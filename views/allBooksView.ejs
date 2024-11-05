@@ -32,8 +32,9 @@
                             <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="description" id="description" maxlength="200" placeholder="Enter your new book description here, or feel free to leave it blank."></textarea>
                             <label for="review">Add Review:</label>
                             <textarea class="editInput" rows="4" style="width: 80%; overflow-y: scroll;" name="review" id="review" placeholder="Enter your new review here, or feel free to leave it blank."></textarea>
+                            <div class="dropdowns">
                             <label for="genre">Add Genre:</label>
-                            <select id="genreDropdown" name="genres">
+                            <select id="genreDropdown" name="genres" style="font-weight: normal;" required>
                                 <option value="" disabled selected>Select an option</option>
                                 <option value="General Fiction">General Fiction</option>
                                 <option value="Fantasy & Sci-Fi">Fantasy & Sci-Fi</option>
@@ -50,13 +51,15 @@
                                 <option value="Arts & Culture">Arts & Culture</option>
                             </select>
                             <label for="rating">Add Rating:</label>
-                            <select id="ratingDropdown" name="ratings">
+                            <select id="ratingDropdown" name="ratings" required>
+                                <option value="" disabled selected>...</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
+                        </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn" style="color: #fef3ea; border: 1px solid #fef3ea;">Save changes</button>
@@ -66,14 +69,51 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="viewBookmarkModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">View Bookmarked Books</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="editBook">
+                        <% books.forEach(book => { %>
+                            <% if (book.is_bookmarked) { %>
+                            <div class="all-book">
+                                <a href="/books/<%= book.id %>">
+                                    <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" class="all-book-img" alt="<%= book.title %> cover">
+                                </a>
+                                <h2><%= book.title %></h2>
+                            </div>
+                            <% } %>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn" style="color: #fef3ea; border: 1px solid #fef3ea;">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="content-all">
+        <div class="back-button-allView">
+            <a href="/">
+                <img src="/images/back-btn.png" alt="back">
+            </a>
+        </div>
         <div class="all-books-container">
             <div class="all-books-bar">
+                <div class="back-button-allView-header">
+                    <a href="/">
+                        <img src="/images/back-btn.png" alt="back">
+                    </a>
+                </div>
                 <h1>All Reviewed Books</h1>
             </div>
             <div class="all-books-content">
                 <div class="sort-by">
-                    <div class="genre-group">
                     <select id="genreNonModal" name="sort-genre">
                         <option value="" disabled selected>Sort by Genre</option>
                         <option value="General Fiction">General Fiction</option>
@@ -90,17 +130,15 @@
                         <option value="Poetry & Essays">Poetry & Essays</option>
                         <option value="Arts & Culture">Arts & Culture</option>
                     </select>
-                    </div>
-                    <div class="rating-group">
                         <select id="ratingNonModal" name="sort-rating">
                             <option value="" disabled selected>Sort By Rating</option>
                             <option value="lowestToHighest">Lowest To Highest</option>
                             <option value="HighestToLowest">Highest to Lowest</option>
                         </select>
-                    </div>
-                    <form action="/allBooks" method="GET">
-                        <button type="submit" class="resetBtn">Reset</button>
-                    </form>
+                        <a href="/allBooks">
+                            <button type="submit" class="resetBtn">Reset</button>
+                        </a>
+                    <button class="resetBtn" data-bs-toggle="modal" data-bs-target="#viewBookmarkModal">Bookmarks</button>
                 </div>
                 <div class="all-books-shelf">
                     <button class="add-book" data-bs-toggle="modal" data-bs-target="#createBookModal">
@@ -108,6 +146,24 @@
                     </button>
                     <%books.forEach(book => {%>
                             <div class="all-book">
+                                <div class="delete-btn" data-book-id="<%=book.id%>">
+                                    <svg class="trash-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1366" height="768" viewBox="0 0 1024.5 576" preserveAspectRatio="xMidYMid meet" version="1.0">
+                                        <defs>
+                                            <clipPath id="9b66472e1e">
+                                                <path d="M 260.121094 0.140625 L 763.878906 0.140625 L 763.878906 143 L 260.121094 143 Z M 260.121094 0.140625 " clip-rule="nonzero"/>
+                                            </clipPath>
+                                            <clipPath id="f49b7f79de">
+                                                <path d="M 296 180 L 729 180 L 729 575.859375 L 296 575.859375 Z M 296 180 " clip-rule="nonzero"/>
+                                            </clipPath>
+                                        </defs>
+                                        <g clip-path="url(#9b66472e1e)">
+                                            <path fill="currentColor" d="M 745.886719 70.757812 L 619.949219 70.757812 L 619.949219 18.132812 C 619.949219 8.238281 611.851562 0.140625 601.957031 0.140625 L 422.042969 0.140625 C 412.148438 0.140625 404.054688 8.238281 404.054688 18.132812 L 404.054688 70.757812 L 278.113281 70.757812 C 268.21875 70.757812 260.121094 78.851562 260.121094 88.746094 L 260.121094 124.730469 C 260.121094 134.625 268.21875 142.722656 278.113281 142.722656 L 745.886719 142.722656 C 755.78125 142.722656 763.878906 134.625 763.878906 124.730469 L 763.878906 88.746094 C 763.878906 78.851562 755.78125 70.757812 745.886719 70.757812 Z M 745.886719 70.757812 " fill-opacity="1" fill-rule="nonzero"/>
+                                        </g>
+                                        <g clip-path="url(#f49b7f79de)">
+                                            <path fill="currentColor" d="M 339.285156 560.117188 C 340.183594 569.113281 347.832031 575.859375 357.277344 575.859375 L 667.175781 575.859375 C 676.171875 575.859375 683.816406 569.113281 685.164062 560.117188 L 728.34375 180.503906 L 296.105469 180.503906 Z M 583.964844 501.644531 L 615.449219 250.21875 C 616.800781 240.324219 625.792969 233.578125 635.691406 234.476562 C 645.585938 235.824219 652.332031 244.820312 651.433594 254.714844 L 619.949219 506.144531 C 618.597656 515.140625 610.953125 521.886719 601.957031 521.886719 C 601.058594 521.886719 600.605469 521.886719 599.707031 521.886719 C 589.8125 520.535156 583.066406 511.539062 583.964844 501.644531 Z M 494.007812 252.46875 C 494.007812 242.570312 502.105469 234.476562 512 234.476562 C 521.894531 234.476562 529.992188 242.570312 529.992188 252.46875 L 529.992188 503.894531 C 529.992188 513.789062 521.894531 521.886719 512 521.886719 C 502.105469 521.886719 494.007812 513.789062 494.007812 503.894531 Z M 388.308594 234.476562 C 398.207031 233.125 407.203125 240.324219 408.550781 250.21875 L 440.035156 501.644531 C 441.382812 511.539062 434.1875 520.535156 424.292969 521.886719 C 423.394531 521.886719 422.945312 521.886719 422.042969 521.886719 C 413.046875 521.886719 405.402344 515.140625 404.054688 506.144531 L 372.566406 254.714844 C 371.667969 244.820312 378.414062 235.824219 388.308594 234.476562 Z M 388.308594 234.476562 " fill-opacity="1" fill-rule="nonzero"/>
+                                        </g>
+                                    </svg>
+                                </div>
                                 <a href="/books/<%=book.id%>">
                                     <img src="https://covers.openlibrary.org/b/isbn/<%=book.isbn%>-M.jpg" class="all-book-img">
                                 </a>
