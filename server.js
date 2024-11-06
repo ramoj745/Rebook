@@ -3,16 +3,19 @@ import bodyParser from "body-parser"
 import pg from "pg"
 import methodOverride from "method-override"
 import axios from "axios"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const app = express()
 const port = 3000
 
 const db = new pg.Client({
-    user: "postgres",
-    password: "75369854123",
-    host: "localhost",
-    port: 5432,
-    database: "books",
+    user: process.env.SUPABASE_DB_USER,
+    password: process.env.SUPABASE_DB_PASSWORD,
+    host: process.env.SUPABASE_DB_HOST,
+    port: process.env.SUPABASE_DB_PORT,
+    database: process.env.SUPABASE_DB_NAME,
 })
 
 db.connect()
@@ -43,25 +46,15 @@ async function editSpecificBook(id, isbn, description, review, genre, rating) {
 
     try {
         if (isbn) {
-            
-            await db.query(
-                "UPDATE reviewed_books SET isbn = $1 WHERE id = $2", [isbn, id]
-            )
             const response = await axios.get(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`)
             const bookData = response.data[`ISBN:${isbn}`]
-            
             const title = bookData.title
             const author = bookData.authors[0].name
             const bookLink = bookData.url
-
-            try {
-                await db.query(
-                    "UPDATE reviewed_books SET title = $1, author = $2, book_link = $3 WHERE id = $4",
-                    [title, author, bookLink, id]
-                )
-            } catch (error) {
-                console.error(error)
-            }
+            
+            await db.query(
+                "UPDATE reviewed_books SET isbn = $1, title = $2, author = $3, book_link = $4 WHERE id = $5", [isbn, title, author, bookLink]
+            )
         }
         if (description) {
             await db.query(
@@ -75,21 +68,18 @@ async function editSpecificBook(id, isbn, description, review, genre, rating) {
                 [review, id]
             )
         }
-
         if (genre) {
             await db.query(
                 "UPDATE reviewed_books SET genre = $1 WHERE id = $2",
                 [genre, id]
             )
         }
-
         if (rating) {
             await db.query(
                 "UPDATE reviewed_books SET rating = $1::integer WHERE id = $2",
                 [rating, id]
             )
         }
-
     } catch (error) {
         console.error(error)
     }
@@ -111,7 +101,7 @@ async function createBook(isbn, description, genre, review, rating) {
             )
 
     } catch (error) {
-        console.error(error)
+        console.error(error) 
     }
 }
 
@@ -124,18 +114,15 @@ async function filterBooks(genre, rating) {
         query += " WHERE genre = $1"
         params.push(genre)
     }
-
     if (rating) {
         query += ` ORDER BY rating ${rating === "lowestToHighest" ? "ASC" : "DESC"}`
     }
-
     try {
         const response = await db.query(query,params)
         return response.rows
     } catch (error) {
         console.error(error)
     }
-    
 }
 
 async function deleteBook(id) {
