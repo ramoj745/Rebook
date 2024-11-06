@@ -2,14 +2,17 @@
 
 Welcome to **Rebook**, a curated collection of book reviews and ratings to guide you to better books! Whether you're searching for a great read or looking to share recommendations with others, Rebook has you covered. This web app offers a browsable selection of books, each reviewed and rated by the curator.
 
+This project was made with ❤️ by ram
+
 ## Features
 
-- **Responsive Design**: Optimized to provide a seamless experience across all device sizes, from desktops to smartphones.
 - **Curated Book Reviews**: View books that have been handpicked and rated with personal reviews.
 - **Detailed Book Information**: Each book entry includes its cover, author, title, description, and a unique review.
 - **Sorting and Filtering**: Easily browse through the collection by rating or genre to find books that match your interests.
 - **User Actions**: Share, bookmark, or sort through all reviewed books to tailor your browsing experience.
 - **Book Management**: As the curator, add books to the collection by ISBN, with automatic population of the cover, author, and title fields.
+- **Responsive Design**: Optimized to provide a seamless experience across all device sizes, from desktops to smartphones.
+- **API Integration**: OpenLibrary API (for fetching book details like covers, authors, and titles)
 
 ## Live Demo
 
