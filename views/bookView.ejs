@@ -84,15 +84,15 @@
                 <h2 class="book-author"><%=book.author%></h2>
                 <p class="book-desc"><%=book.description%></p>
                 <%if (book.rating === 1) {%>
-                    <img src="/images/onestar-cropped.svg" height="30px">
+                    <img src="/images/onestar-cropped.svg" class="star-rating">
                 <%} else if (book.rating === 2) {%>
-                    <img src="/images/twostar-cropped.svg" height="30px">
+                    <img src="/images/twostar-cropped.svg" class="star-rating">
                 <%} else if (book.rating === 3){%>
-                    <img src="/images/threestar-cropped.svg" height="30px">
+                    <img src="/images/threestar-cropped.svg" class="star-rating">
                 <%} else if (book.rating === 4){%>
-                    <img src="/images/fourstar-cropped.svg" height="30px">
+                    <img src="/images/fourstar-cropped.svg" class="star-rating">
                 <%} else if (book.rating === 5){%>
-                    <img src="/images/fivestar-cropped.svg" height="30px">
+                    <img src="/images/fivestar-cropped.svg" class="star-rating">
                 <%}%>
             </div>
         </div>
