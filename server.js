@@ -53,7 +53,7 @@ async function editSpecificBook(id, isbn, description, review, genre, rating) {
             const bookLink = bookData.url
             
             await db.query(
-                "UPDATE reviewed_books SET isbn = $1, title = $2, author = $3, book_link = $4 WHERE id = $5", [isbn, title, author, bookLink]
+                "UPDATE reviewed_books SET isbn = $1, title = $2, author = $3, book_link = $4 WHERE id = $5", [isbn, title, author, bookLink, id]
             )
         }
         if (description) {
